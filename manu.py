@@ -34,13 +34,13 @@ if 'progression' not in st.session_state:
     update_progression(data_initiale)
 
 def main():
-    st.title("Explorateur de Chapitres")
+    st.title(":blue[Hello Emma] 👋,Explore les Chapitres du livre de Daniel 😎")
     data = load_data()
 
     col1, col2 = st.columns([3, 1])
 
     with col1:
-        chapitre_choice = st.selectbox("Choisissez un chapitre", data["CHAPITRES"])
+        chapitre_choice = st.selectbox("Choisi un chapitre 😊", data["CHAPITRES"])
         chapitre_info = data[data["CHAPITRES"] == chapitre_choice].iloc[0]
         
         # Affichage simulé du contenu du chapitre
@@ -501,18 +501,19 @@ def main():
             st.write(":red[12] Heureux celui qui attendra et parviendra à 1 335 jours !")
             st.write(":red[13] Et toi, va jusqu’à la fin. Tu te reposeras, puis tu te tiendras debout pour recevoir ta part à la fin des jours.")
 
-        termine = st.checkbox("Terminé", chapitre_info["Terminé"] == 1)
 
-
-        if st.button("Mettre à jour"):
-            updated_data = update_excel(chapitre_choice, int(termine))
-            update_progression(updated_data)
-            st.success("Mise à jour effectuée.")
 
     with col2:
         st.write("Votre progression :")
         # Affichage de la jauge de progression sans division par 100
         st.progress(st.session_state.progression)
         st.write(f"{st.session_state.progression:.2f}%")
+
+        termine = st.checkbox("Terminé", chapitre_info["Terminé"] == 1)
+
+        if st.button("Mettre à jour"):
+            updated_data = update_excel(chapitre_choice, int(termine))
+            update_progression(updated_data)
+            st.success("Mise à jour effectuée.")
 
 main()
