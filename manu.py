@@ -509,7 +509,7 @@ def main():
         st.progress(st.session_state.progression)
         st.write(f"{st.session_state.progression:.2f}%")
 
-        termine = st.checkbox("Terminé", chapitre_info["Terminé"] == 1)
+        termine = st.checkbox("Coche puis met à jour 👇 si tu as terminé le chapitre 💪", chapitre_info["Terminé"] == 1)
 
         if st.button("Mettre à jour"):
             updated_data = update_excel(chapitre_choice, int(termine))
