@@ -504,7 +504,7 @@ def main():
 
 
     with col2:
-        st.write("Ta progression :")
+        st.write(":blue[Ta progression :]")
         # Affichage de la jauge de progression sans division par 100
         st.progress(st.session_state.progression)
         st.write(f"{st.session_state.progression:.2f}%")
