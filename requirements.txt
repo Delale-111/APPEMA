@@ -1,0 +1,12 @@
+streamlit
+streamlit-javascript
+pandas
+psycopg2
+datetime
+streamlit_lottie
+geopy
+folium
+altair
+streamlit_shadcn_ui 
+streamlit_option_menu 
+plotly
