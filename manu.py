@@ -4,7 +4,6 @@ import openpyxl
 
 st.set_page_config(page_title="APP MANU", page_icon="📄", layout="wide")
 
-# Chemin vers le fichier Excel
 fichier_path = 'fichier.xlsx'
 
 def load_data():
@@ -13,8 +12,7 @@ def load_data():
 def update_excel(chapitre, termine):
     book = openpyxl.load_workbook(fichier_path)
     sheet = book.active
-    
-    # Trouver la ligne correspondante au chapitre
+
     for row in range(2, sheet.max_row + 1):
         if sheet[f'A{row}'].value == chapitre:
             sheet[f'B{row}'] = termine
@@ -22,13 +20,11 @@ def update_excel(chapitre, termine):
     
     book.save(fichier_path)
     book.close()
-    return load_data()  # Retourne les données mises à jour
+    return load_data()
 
 def update_progression(data):
-    # Mise à jour de la progression dans st.session_state
     st.session_state.progression = sum(data["Terminé"] * data["Pourcentage évolution"])
 
-# Initialisation de la progression avec les données actuelles du fichier Excel
 if 'progression' not in st.session_state:
     data_initiale = load_data()
     update_progression(data_initiale)
@@ -42,8 +38,7 @@ def main():
     with col1:
         chapitre_choice = st.selectbox("Choisi un chapitre 😊", data["CHAPITRES"])
         chapitre_info = data[data["CHAPITRES"] == chapitre_choice].iloc[0]
-        
-        # Affichage simulé du contenu du chapitre
+
         st.write(f"Contenu du Chapitre {chapitre_choice}")
         if chapitre_choice == 1:
             st.write(":red[01] LA TROISIEME ANNEE du règne de Joakim, roi de Juda, Nabucodonosor, roi de Babylone, arriva devant Jérusalem et l’assiégea.")
@@ -505,7 +500,6 @@ def main():
 
     with col2:
         st.write(":blue[Ta progression :]")
-        # Affichage de la jauge de progression sans division par 100
         st.progress(st.session_state.progression)
         st.write(f"{st.session_state.progression:.2f}%")
 
